@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nripesh Kumar — AI Product Manager</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:        #0D0D0D;
+      --paper:      #F7F6F2;
+      --mid:        #6B6B6B;
+      --rule:       #E2E0D8;
+      --signal:     #1A56DB;   /* electric blue — precise, technical */
+      --signal-dim: #D6E4FF;
+      --mono-bg:    #EEECEA;
+      --radius:     6px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(247,246,242,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px; font-weight: 500;
+      color: var(--signal); letter-spacing: 0.04em;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-size: 13px; font-weight: 500; color: var(--mid);
+      text-decoration: none; letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 48px 72px;
+      border-bottom: 1px solid var(--rule);
+      position: relative; overflow: hidden;
+    }
+
+    /* grid background — the signature element */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--rule) 1px, transparent 1px),
+        linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    /* animated status pill */
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 500;
+      color: var(--signal);
+      background: var(--signal-dim);
+      border: 1px solid var(--signal);
+      border-radius: 100px;
+      padding: 5px 14px;
+      margin-bottom: 28px;
+      width: fit-content;
+      position: relative; z-index: 1;
+    }
+    .pulse {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--signal);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.75); }
+    }
+
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; color: var(--mid); letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 16px;
+      position: relative; z-index: 1;
+    }
+
+    .hero-name {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(56px, 8vw, 108px);
+      font-weight: 800; line-height: 0.92;
+      letter-spacing: -0.03em;
+      position: relative; z-index: 1;
+    }
+    .hero-name .line2 {
+      color: transparent;
+      -webkit-text-stroke: 2px var(--ink);
+    }
+
+    .hero-bottom {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-top: 48px; position: relative; z-index: 1;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .hero-descriptor {
+      font-size: 17px; font-weight: 300; color: var(--mid);
+      max-width: 460px; line-height: 1.65;
+    }
+    .hero-descriptor strong { color: var(--ink); font-weight: 500; }
+
+    .hero-cta-group { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border-radius: var(--radius);
+      font-size: 14px; font-weight: 500; text-decoration: none;
+      transition: all 0.18s; cursor: pointer; border: none;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-primary {
+      background: var(--ink); color: var(--paper);
+    }
+    .btn-primary:hover { background: #2a2a2a; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; color: var(--ink);
+      border: 1.5px solid var(--ink);
+    }
+    .btn-outline:hover { background: var(--ink); color: var(--paper); transform: translateY(-1px); }
+
+    /* ── SECTION WRAPPER ── */
+    section { padding: 96px 48px; border-bottom: 1px solid var(--rule); }
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 500; color: var(--mid);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 48px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-label::after {
+      content: ''; flex: 1; height: 1px; background: var(--rule);
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+      align-items: start;
+    }
+    .about-headline {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 700; line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+    .about-body {
+      color: var(--mid); font-size: 15px; line-height: 1.75;
+    }
+    .about-body p + p { margin-top: 16px; }
+    .about-body strong { color: var(--ink); font-weight: 500; }
+
+    .stat-row {
+      display: flex; gap: 40px; margin-top: 40px; flex-wrap: wrap;
+    }
+    .stat { }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 36px; font-weight: 800; line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .stat-label {
+      font-size: 12px; color: var(--mid); margin-top: 4px;
+      font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .project-card {
+      background: #fff;
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 32px;
+      position: relative;
+      transition: box-shadow 0.2s, transform 0.2s;
+      overflow: hidden;
+    }
+    .project-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+    .project-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--signal);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .project-card:hover::before { transform: scaleX(1); }
+
+    .card-status {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; font-weight: 500;
+      padding: 3px 10px; border-radius: 100px;
+      margin-bottom: 20px;
+    }
+    .status-building {
+      background: #FEF3C7; color: #92400E;
+      border: 1px solid #FDE68A;
+    }
+    .status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+
+    .card-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; color: var(--rule);
+      font-weight: 500; margin-bottom: 8px;
+    }
+    .card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 19px; font-weight: 700;
+      line-height: 1.2; margin-bottom: 10px;
+    }
+    .card-desc {
+      font-size: 13.5px; color: var(--mid);
+      line-height: 1.65; margin-bottom: 20px;
+    }
+    .card-tags {
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; font-weight: 500;
+      background: var(--mono-bg); color: var(--mid);
+      padding: 3px 9px; border-radius: 4px;
+    }
+    .card-signal {
+      margin-top: 20px; padding-top: 20px;
+      border-top: 1px solid var(--rule);
+      font-size: 12px; color: var(--mid); line-height: 1.55;
+    }
+    .card-signal strong { color: var(--ink); }
+
+    /* capstone card */
+    .project-card.capstone {
+      grid-column: 1 / -1;
+      background: var(--ink); color: var(--paper);
+      border-color: var(--ink);
+    }
+    .capstone .card-num { color: #333; }
+    .capstone .card-desc { color: #9CA3AF; }
+    .capstone .tag { background: #1f1f1f; color: #9CA3AF; }
+    .capstone .card-signal { border-color: #2a2a2a; color: #9CA3AF; }
+    .capstone .card-signal strong { color: var(--paper); }
+    .capstone .card-status { background: #1f1f1f; color: #60A5FA; border-color: #2563EB; }
+    .capstone::before { background: var(--signal); }
+
+    /* ── EXPERIENCE ── */
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+    .exp-item {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 32px;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: start;
+    }
+    .exp-item:first-child { padding-top: 0; }
+    .exp-meta { }
+    .exp-period {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; color: var(--mid); letter-spacing: 0.04em;
+    }
+    .exp-company {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px; font-weight: 700; margin-top: 6px;
+    }
+    .exp-role {
+      font-size: 13px; color: var(--mid); margin-top: 2px;
+    }
+    .exp-content { }
+    .exp-bullets {
+      list-style: none; display: flex; flex-direction: column; gap: 10px;
+    }
+    .exp-bullets li {
+      font-size: 14px; color: var(--mid); line-height: 1.65;
+      padding-left: 16px; position: relative;
+    }
+    .exp-bullets li::before {
+      content: '→';
+      position: absolute; left: 0;
+      color: var(--signal); font-size: 12px;
+    }
+    .exp-bullets li strong { color: var(--ink); font-weight: 500; }
+
+    /* ── STACK ── */
+    .stack-grid {
+      display: flex; flex-wrap: wrap; gap: 10px;
+    }
+    .stack-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; font-weight: 500;
+      background: var(--mono-bg);
+      border: 1px solid var(--rule);
+      color: var(--ink);
+      padding: 6px 14px; border-radius: var(--radius);
+      transition: all 0.15s;
+    }
+    .stack-chip:hover {
+      background: var(--signal-dim);
+      border-color: var(--signal);
+      color: var(--signal);
+    }
+
+    /* ── CONTACT ── */
+    .contact-inner {
+      max-width: 640px;
+    }
+    .contact-headline {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -0.02em; margin-bottom: 20px;
+    }
+    .contact-sub {
+      font-size: 15px; color: var(--mid); line-height: 1.7;
+      margin-bottom: 36px;
+    }
+    .contact-links {
+      display: flex; flex-wrap: wrap; gap: 12px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 28px 48px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-left {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; color: var(--mid);
+    }
+    .footer-right {
+      font-size: 12px; color: var(--mid);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 0 24px 56px; }
+      section { padding: 64px 24px; }
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .exp-item { grid-template-columns: 1fr; gap: 8px; }
+      footer { padding: 20px 24px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">nripesh.dev</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="status-pill">
+    <span class="pulse"></span>
+    Building AI products · Open to part-time PM roles
+  </div>
+  <p class="hero-eyebrow">Software Engineer → AI Product Manager</p>
+  <h1 class="hero-name">
+    Nripesh<br>
+    <span class="line2">Kumar</span>
+  </h1>
+  <div class="hero-bottom">
+    <p class="hero-descriptor">
+      <strong>UCLA Anderson MBA '28.</strong> Former Senior SWE at Visa.
+      Building AI-native products at the intersection of
+      enterprise fintech, LLMs, and human-centered design.
+    </p>
+    <div class="hero-cta-group">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="https://www.linkedin.com/in/nripesh-kumar" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">About</p>
+  <div class="about-grid">
+    <div>
+      <h2 class="about-headline">Engineer who thinks in products. Builder who ships.</h2>
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-num">4+</div>
+          <div class="stat-label">Years at Visa</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Graduate Degrees</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">95</div>
+          <div class="stat-label">CareerLeader · Tech Interest</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-body">
+      <p>I spent four years as a Senior Software Engineer at <strong>Visa</strong>, helping launch V-ARM — Visa's first B2B accounts receivables product — and shipping an internal <strong>multi-agent AI tool</strong> that cut BRD review time from 2 hours to 2 minutes.</p>
+      <p>Before that, I earned an <strong>M.S. in Computer Science (ML specialization) from Columbia</strong> and a B.Tech. in CS from NIT Trichy. I'm now joining <strong>UCLA Anderson's MBA program</strong> to make the full transition into product management.</p>
+      <p>I'm currently building a portfolio of <strong>AI-native fintech tools</strong> — working in public, shipping fast, and documenting the tradeoffs. Available for <strong>part-time PM roles</strong> (20 hrs/week, remote) from July 2026.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">Projects in progress</p>
+  <div class="projects-grid">
+
+    <!-- P1 -->
+    <div class="project-card">
+      <span class="card-status status-building"><span class="status-dot"></span>Building · Week 1–3</span>
+      <p class="card-num">01</p>
+      <h3 class="card-title">Payment Instruction Parser</h3>
+      <p class="card-desc">LLM-powered extraction of structured payment data from unstructured emails — replacing brittle regex pipelines with a hallucination-aware AI layer.</p>
+      <div class="card-tags">
+        <span class="tag">Python</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">Claude API</span>
+        <span class="tag">Streamlit</span>
+        <span class="tag">PostgreSQL</span>
+      </div>
+      <div class="card-signal">
+        <strong>PM signal:</strong> When does AI fail vs. regex? Documenting hallucination risk in financial contexts — a core AI PM interview answer.
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="project-card">
+      <span class="card-status status-building"><span class="status-dot"></span>Building · Week 1–3</span>
+      <p class="card-num">02</p>
+      <h3 class="card-title">PRD Quality Reviewer</h3>
+      <p class="card-desc">Scores product requirements documents across clarity, completeness, edge-case coverage, and acceptance criteria quality — with section-level feedback.</p>
+      <div class="card-tags">
+        <span class="tag">Python</span>
+        <span class="tag">Claude API</span>
+        <span class="tag">Streamlit</span>
+      </div>
+      <div class="card-signal">
+        <strong>PM signal:</strong> Shows I've read and contributed to real PRDs. I know what "good" looks like — rare for an engineering PM candidate.
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="project-card">
+      <span class="card-status status-building"><span class="status-dot"></span>Building · Week 4–7</span>
+      <p class="card-num">03</p>
+      <h3 class="card-title">B2B Payments Dispute Classifier</h3>
+      <p class="card-desc">Classifies payment disputes by type, resolution path, and regulatory flag — with confidence thresholds that route low-confidence cases to human review.</p>
+      <div class="card-tags">
+        <span class="tag">Spring Boot</span>
+        <span class="tag">Claude API</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">React</span>
+      </div>
+      <div class="card-signal">
+        <strong>PM signal:</strong> AI confidence thresholds in compliance-adjacent contexts — how do you handle model error in a regulated industry?
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="project-card">
+      <span class="card-status status-building"><span class="status-dot"></span>Building · Week 4–7</span>
+      <p class="card-num">04</p>
+      <h3 class="card-title">SMB Financial Health Co-Pilot</h3>
+      <p class="card-desc">Multi-doc RAG pipeline that ingests invoices and bank statements to surface cash flow risks, AR improvement suggestions, and cited insights for small business owners.</p>
+      <div class="card-tags">
+        <span class="tag">Python</span>
+        <span class="tag">pgvector</span>
+        <span class="tag">Claude API</span>
+        <span class="tag">PostgreSQL</span>
+      </div>
+      <div class="card-signal">
+        <strong>PM signal:</strong> User research + RAG tradeoffs + real SMB interviews. Bridges my consumer product experience gap.
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="project-card">
+      <span class="card-status status-building"><span class="status-dot"></span>Building · Week 4–7</span>
+      <p class="card-num">05</p>
+      <h3 class="card-title">API Reliability Monitor</h3>
+      <p class="card-desc">Polls public APIs for latency spikes and error rate anomalies, then uses an LLM to generate plain-English incident reports and root cause hypotheses from raw logs.</p>
+      <div class="card-tags">
+        <span class="tag">Spring Boot</span>
+        <span class="tag">Kafka</span>
+        <span class="tag">Claude API</span>
+        <span class="tag">PostgreSQL</span>
+      </div>
+      <div class="card-signal">
+        <strong>PM signal:</strong> Platform/infra PM thinking — SLAs, developer experience, reliability. Strong fit for Stripe, Plaid, AWS PM roles.
+      </div>
+    </div>
+
+    <!-- CAPSTONE -->
+    <div class="project-card capstone">
+      <span class="card-status status-building"><span class="status-dot"></span>Capstone · Month 2–3</span>
+      <p class="card-num">06</p>
+      <h3 class="card-title">AR Intelligence Platform</h3>
+      <p class="card-desc">Full-stack AI product for mid-market finance teams. Multi-agent pipeline: overdue account tracker, payment likelihood predictor, and tone-aware follow-up email drafter. Subscription billing, auth, and real beta users.</p>
+      <div class="card-tags">
+        <span class="tag">Spring Boot</span>
+        <span class="tag">pgvector</span>
+        <span class="tag">Claude API</span>
+        <span class="tag">React</span>
+        <span class="tag">Clerk</span>
+        <span class="tag">Stripe</span>
+        <span class="tag">Vercel</span>
+        <span class="tag">Railway</span>
+      </div>
+      <div class="card-signal">
+        <strong>PM signal:</strong> The product I helped engineer at Visa — now owned end-to-end as a PM. Every AI tradeoff, user research session, and pricing decision documented.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">Experience</p>
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-period">2026 → 2028</p>
+        <p class="exp-company">UCLA Anderson</p>
+        <p class="exp-role">MBA, Full-Time</p>
+      </div>
+      <ul class="exp-bullets">
+        <li><strong>705 GMAT Focus (750 GMAT).</strong> AnderTech, Management Consulting Association.</li>
+        <li>Concentrating on product management, AI strategy, and technology entrepreneurship.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-period">Jul 2022 → Present</p>
+        <p class="exp-company">Visa</p>
+        <p class="exp-role">Senior Software Engineer</p>
+      </div>
+      <ul class="exp-bullets">
+        <li>Co-defined MVP scope and GTM requirements for <strong>V-ARM</strong> — Visa's first B2B accounts receivables product.</li>
+        <li>Shipped a <strong>multi-agent BRD Scoring tool</strong> cutting manual review from ~2 hours to ~2 minutes.</li>
+        <li>Drove cross-continental delivery (Singapore/Austin), unblocking a 1-month delay and securing U.S. launch.</li>
+        <li>Championed generative AI for assistive coding, boosting deployment frequency by <strong>25%</strong> and cutting time-to-quality by <strong>30%</strong>.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-period">Jun 2021 → May 2022</p>
+        <p class="exp-company">Columbia University</p>
+        <p class="exp-role">Graduate Research Assistant · E3B Dept.</p>
+      </div>
+      <ul class="exp-bullets">
+        <li>Defined data acquisition requirements for a <strong>2TB satellite imagery ETL pipeline</strong>, increasing throughput by 30%.</li>
+        <li>Translated researcher pain points into a self-serve imagery processing tool, accelerating rainforest mapping by 30%.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-period">Oct 2020 → Dec 2020</p>
+        <p class="exp-company">Flatworld Solutions</p>
+        <p class="exp-role">Analyst Intern</p>
+      </div>
+      <ul class="exp-bullets">
+        <li>Scoped and delivered an <strong>AI-powered document extraction solution</strong> for mortgage lenders, cutting processing time by 40%.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- STACK -->
+<section id="stack">
+  <p class="section-label">Technical fluency</p>
+  <div class="stack-grid">
+    <span class="stack-chip">LLM / GenAI</span>
+    <span class="stack-chip">Claude API</span>
+    <span class="stack-chip">Multi-agent Systems</span>
+    <span class="stack-chip">RAG Pipelines</span>
+    <span class="stack-chip">Python</span>
+    <span class="stack-chip">Java · Spring Boot</span>
+    <span class="stack-chip">Node.js</span>
+    <span class="stack-chip">React</span>
+    <span class="stack-chip">PostgreSQL</span>
+    <span class="stack-chip">pgvector</span>
+    <span class="stack-chip">Kafka</span>
+    <span class="stack-chip">Streamlit</span>
+    <span class="stack-chip">Vercel · Railway</span>
+    <span class="stack-chip">Agile / Scrum</span>
+    <span class="stack-chip">Product Roadmapping</span>
+    <span class="stack-chip">PRD Writing</span>
+    <span class="stack-chip">User Research</span>
+    <span class="stack-chip">A/B Testing</span>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Get in touch</p>
+  <div class="contact-inner">
+    <h2 class="contact-headline">Let's build something that matters.</h2>
+    <p class="contact-sub">
+      I'm open to part-time PM roles, fractional product work, and conversations with founders building at the intersection of AI and enterprise software. 20 hrs/week · Remote · Available from July 27, 2026.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:nrikmr88@gmail.com" class="btn btn-primary">nrikmr88@gmail.com</a>
+      <a href="https://www.linkedin.com/in/nripesh-kumar" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+      <a href="https://github.com" target="_blank" class="btn btn-outline">GitHub ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-left">© 2026 Nripesh Kumar</span>
+  <span class="footer-right">UCLA Anderson MBA '28 · ex-Visa · Building in public</span>
+</footer>
+
+</body>
+</html>
