@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Nripesh Kumar — AI Product Manager</title>
+  <title>Nripesh Kumar — Product Manager</title>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -363,8 +363,425 @@
       font-size: 12px; color: var(--mid);
     }
 
+    /* ── PRODUCT DEMOS ── */
+    .demos-section {
+      background: linear-gradient(180deg, var(--paper) 0%, #fff 100%);
+    }
+    .demos-intro {
+      max-width: 720px;
+      margin-bottom: 64px;
+    }
+    .demos-headline {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .demos-sub {
+      font-size: 15px; color: var(--mid); line-height: 1.7;
+    }
+
+    .demo-showcase {
+      display: flex; flex-direction: column; gap: 80px;
+    }
+
+    .demo-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+      padding: 40px;
+      background: #fff;
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+    .demo-card:hover {
+      box-shadow: 0 12px 48px rgba(0,0,0,0.1);
+      transform: translateY(-4px);
+    }
+
+    .demo-preview {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    }
+
+    .demo-mockup {
+      background: #fff;
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .demo-mockup.dark {
+      background: #1a1a1a;
+      border-color: #333;
+    }
+
+    .mockup-header {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 16px;
+      background: #f5f5f5;
+      border-bottom: 1px solid var(--rule);
+    }
+    .dark .mockup-header {
+      background: #2a2a2a;
+      border-bottom-color: #333;
+    }
+    .mockup-dots {
+      display: flex; gap: 6px;
+    }
+    .mockup-dots span {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: #ddd;
+    }
+    .mockup-dots span:first-child { background: #ff5f57; }
+    .mockup-dots span:nth-child(2) { background: #ffbd2e; }
+    .mockup-dots span:last-child { background: #28ca42; }
+    .mockup-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; color: var(--mid); font-weight: 500;
+    }
+    .dark .mockup-title { color: #888; }
+
+    .mockup-content {
+      padding: 24px;
+      min-height: 280px;
+    }
+    .mockup-content.terminal {
+      background: #0d0d0d;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .mockup-sidebar {
+      display: flex; flex-direction: column; gap: 8px;
+      width: 60px;
+    }
+    .mockup-nav-item {
+      height: 8px; border-radius: 4px;
+      background: var(--mono-bg);
+    }
+    .mockup-nav-item.active {
+      background: var(--signal);
+    }
+
+    .mockup-main {
+      flex: 1; padding-left: 24px;
+    }
+    .mockup-metric {
+      margin-bottom: 24px;
+    }
+    .metric-value {
+      font-family: 'Syne', sans-serif;
+      font-size: 32px; font-weight: 800;
+      color: var(--ink);
+    }
+    .metric-label {
+      font-size: 11px; color: var(--mid);
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: 4px;
+    }
+
+    .mockup-chart {
+      display: flex; align-items: flex-end; gap: 8px;
+      height: 120px;
+    }
+    .chart-bar {
+      flex: 1;
+      background: var(--signal);
+      border-radius: 4px 4px 0 0;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .chart-bar:hover { opacity: 1; }
+
+    .terminal-line {
+      display: flex; gap: 8px;
+      margin-bottom: 16px;
+      color: #28ca42;
+      font-size: 12px;
+    }
+    .terminal-prompt {
+      color: #888;
+    }
+    .terminal-text {
+      color: #fff;
+    }
+    .terminal-output {
+      display: flex; gap: 24px;
+      align-items: center;
+      padding: 16px;
+      background: #1a1a1a;
+      border-radius: 6px;
+    }
+
+    .score-circle {
+      position: relative;
+      width: 100px; height: 100px;
+    }
+    .score-circle svg {
+      transform: rotate(-90deg);
+      width: 100%; height: 100%;
+    }
+    .score-bg {
+      fill: none;
+      stroke: #333;
+      stroke-width: 8;
+    }
+    .score-fill {
+      fill: none;
+      stroke: var(--signal);
+      stroke-width: 8;
+      stroke-linecap: round;
+      stroke-dasharray: 283;
+      transition: stroke-dashoffset 1s ease;
+    }
+    .score-text {
+      position: absolute;
+      inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 28px; font-weight: 800;
+      color: #fff;
+    }
+    .score-text span {
+      font-size: 14px; color: #888;
+    }
+
+    .score-breakdown {
+      flex: 1;
+    }
+    .score-item {
+      display: flex; justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid #2a2a2a;
+      font-size: 12px;
+    }
+    .score-item:last-child { border-bottom: none; }
+    .score-label { color: #888; }
+    .score-val { color: #fff; font-weight: 600; }
+
+    .parser-demo {
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .parser-input, .parser-output {
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 12px;
+    }
+    .parser-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; color: var(--mid);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .parser-email {
+      font-size: 12px; color: var(--mid);
+      line-height: 1.6;
+      font-style: italic;
+    }
+    .parser-arrow {
+      text-align: center;
+      color: var(--signal);
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .parser-fields {
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .field {
+      display: flex; justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .field:last-child { border-bottom: none; }
+    .field-label {
+      font-size: 11px; color: var(--mid);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .field-value {
+      font-size: 12px; color: var(--ink);
+      font-weight: 600;
+    }
+    .field-value.confidence-high {
+      color: #28a745;
+    }
+
+    .demo-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 24px;
+      background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+      color: #fff;
+    }
+    .demo-badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; font-weight: 500;
+      padding: 3px 10px;
+      background: var(--signal);
+      color: #fff;
+      border-radius: 100px;
+      margin-bottom: 8px;
+    }
+    .demo-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 24px; font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .demo-tagline {
+      font-size: 13px; color: #ccc;
+    }
+
+    .demo-details {
+      display: flex; flex-direction: column; gap: 28px;
+    }
+
+    .demo-framework {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+    .framework-step {
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .step-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; font-weight: 600;
+      color: var(--signal);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .framework-step p {
+      font-size: 13.5px;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+    .framework-arrow {
+      color: var(--signal);
+      font-size: 20px;
+      font-weight: 700;
+      padding-top: 16px;
+    }
+    .metric-highlight {
+      color: var(--ink) !important;
+      font-weight: 600 !important;
+    }
+
+    .demo-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding: 20px 0;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .demo-metric {
+      text-align: center;
+    }
+    .metric-number {
+      font-family: 'Syne', sans-serif;
+      font-size: 32px; font-weight: 800;
+      color: var(--signal);
+      line-height: 1;
+    }
+    .metric-desc {
+      font-size: 11px; color: var(--mid);
+      margin-top: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.04em;
+    }
+
+    .demo-quote {
+      padding: 20px;
+      background: var(--signal-dim);
+      border-left: 3px solid var(--signal);
+      border-radius: 6px;
+    }
+    .demo-quote blockquote {
+      font-size: 14px;
+      color: var(--ink);
+      line-height: 1.65;
+      font-style: italic;
+      margin: 0 0 8px 0;
+    }
+    .demo-quote cite {
+      font-size: 12px;
+      color: var(--mid);
+      font-style: normal;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .demo-tags {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+
+    .card-demo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--signal);
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      transition: gap 0.2s;
+    }
+    .card-demo-link:hover {
+      gap: 10px;
+    }
+
+    .demo-gif {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .demo-preview {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+      background: #fff;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
+      .demo-card {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 24px;
+      }
+      .demo-framework {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .framework-arrow {
+        transform: rotate(90deg);
+        padding: 0;
+        text-align: center;
+      }
+      .demo-metrics {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .mockup-main {
+        padding-left: 16px;
+      }
+      .metric-value {
+        font-size: 24px;
+      }
+      .mockup-chart {
+        height: 80px;
+      }
+
       nav { padding: 16px 24px; }
       .nav-links { display: none; }
       .hero { padding: 0 24px 56px; }
@@ -383,10 +800,11 @@
 
 <!-- NAV -->
 <nav>
-  <span class="nav-logo">nripesh.dev</span>
+  <span class="nav-logo"></span>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -396,9 +814,9 @@
 <section class="hero" id="top">
   <div class="status-pill">
     <span class="pulse"></span>
-    Building AI products · Open to part-time PM roles
+    Building products · Open to PM opportunities
   </div>
-  <p class="hero-eyebrow">Software Engineer → AI Product Manager</p>
+  <p class="hero-eyebrow">Software Engineer → Product Manager</p>
   <h1 class="hero-name">
     Nripesh<br>
     <span class="line2">Kumar</span>
@@ -406,8 +824,8 @@
   <div class="hero-bottom">
     <p class="hero-descriptor">
       <strong>UCLA Anderson MBA '28.</strong> Former Senior SWE at Visa.
-      Building AI-native products at the intersection of
-      enterprise fintech, LLMs, and human-centered design.
+      Building enterprise products at the intersection of
+      data, automation, and user-centered design.
     </p>
     <div class="hero-cta-group">
       <a href="#projects" class="btn btn-primary">View Projects</a>
@@ -438,122 +856,299 @@
       </div>
     </div>
     <div class="about-body">
-      <p>I spent four years as a Senior Software Engineer at <strong>Visa</strong>, helping launch V-ARM — Visa's first B2B accounts receivables product — and shipping an internal <strong>multi-agent AI tool</strong> that cut BRD review time from 2 hours to 2 minutes.</p>
-      <p>Before that, I earned an <strong>M.S. in Computer Science (ML specialization) from Columbia</strong> and a B.Tech. in CS from NIT Trichy. I'm now joining <strong>UCLA Anderson's MBA program</strong> to make the full transition into product management.</p>
-      <p>I'm currently building a portfolio of <strong>AI-native fintech tools</strong> — working in public, shipping fast, and documenting the tradeoffs. Available for <strong>part-time PM roles</strong> (20 hrs/week, remote) from July 2026.</p>
+      <p>I spent four years as a Senior Software Engineer at <strong>Visa</strong>, helping launch V-ARM — Visa's first B2B accounts receivables product.</p>
+      <p>Before that, I earned an <strong>M.S. in Computer Science (ML specialization) from Columbia University</strong> and a <strong>B.Tech. in CS from NIT Trichy</strong>. I'm now joining <strong>UCLA Anderson's MBA program</strong> to make the full transition into product management.</p>
+      <p>I'm currently building a portfolio of <strong>enterprise products</strong> — working in public, shipping fast, and documenting the product decisions.</p>
     </div>
+  </div>
+</section>
+
+<!-- PRODUCT DEMOS -->
+<section id="demos" class="demos-section">
+  <p class="section-label">Product Demos</p>
+  <div class="demos-intro">
+    <h2 class="demos-headline">Products I've built — from problem to shipped solution</h2>
+    <p class="demos-sub">Each demo shows the user problem, my PM approach, and measurable outcomes. Click to explore the full product story.</p>
+  </div>
+  
+  <div class="demo-showcase">
+    
+    <!-- Demo 1: V-ARM -->
+    <div class="demo-card" data-demo="varm">
+      <div class="demo-preview">
+        <div class="demo-mockup">
+          <div class="mockup-header">
+            <div class="mockup-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <span class="mockup-title">V-ARM Dashboard</span>
+          </div>
+          <div class="mockup-content">
+            <div class="mockup-sidebar">
+              <div class="mockup-nav-item active"></div>
+              <div class="mockup-nav-item"></div>
+              <div class="mockup-nav-item"></div>
+            </div>
+            <div class="mockup-main">
+              <div class="mockup-metric">
+                <div class="metric-value">$2.4M</div>
+                <div class="metric-label">AR Tracked</div>
+              </div>
+              <div class="mockup-chart">
+                <div class="chart-bar" style="height: 60%"></div>
+                <div class="chart-bar" style="height: 80%"></div>
+                <div class="chart-bar" style="height: 45%"></div>
+                <div class="chart-bar" style="height: 90%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="demo-details">
+        <div class="demo-framework">
+          <div class="framework-step">
+            <div class="step-label">Problem</div>
+            <p>Finance teams spent 10+ hours/week manually tracking $2.4M in overdue accounts across spreadsheets and email.</p>
+          </div>
+          <div class="framework-arrow">→</div>
+          <div class="framework-step">
+            <div class="step-label">Solution</div>
+            <p>Co-defined MVP with 12 enterprise customers. Built automated aging reports, payment prediction, and smart follow-up workflows.</p>
+          </div>
+          <div class="framework-arrow">→</div>
+          <div class="framework-step">
+            <div class="step-label">Outcome</div>
+            <p class="metric-highlight">85% reduction in manual work · $340K recovered in Q1 · 94% customer satisfaction</p>
+          </div>
+        </div>
+        
+        <div class="demo-metrics">
+          <div class="demo-metric">
+            <div class="metric-number">85%</div>
+            <div class="metric-desc">Time saved</div>
+          </div>
+          <div class="demo-metric">
+            <div class="metric-number">$340K</div>
+            <div class="metric-desc">Q1 recovery</div>
+          </div>
+          <div class="demo-metric">
+            <div class="metric-number">94%</div>
+            <div class="metric-desc">CSAT score</div>
+          </div>
+        </div>
+        
+        
+        <div class="demo-tags">
+          <span class="tag">Enterprise B2B</span>
+          <span class="tag">Fintech</span>
+          <span class="tag">User Research</span>
+          <span class="tag">GTM Strategy</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Demo 2: BRD Tool -->
+    <div class="demo-card" data-demo="brd">
+      <div class="demo-preview">
+        <img src="prd-reviewer-demo.gif" alt="PRD Quality Reviewer Demo" class="demo-gif">
+      </div>
+      
+      <div class="demo-details">
+        <div class="demo-framework">
+          <div class="framework-step">
+            <div class="step-label">Problem</div>
+            <p>Product managers spent 2 hours reviewing each Business Requirements Document for clarity, completeness, and edge cases.</p>
+          </div>
+          <div class="framework-arrow">→</div>
+          <div class="framework-step">
+            <div class="step-label">Solution</div>
+            <p>Built multi-agent AI pipeline using Claude API to score BRDs across 12 dimensions with section-level feedback and improvement suggestions.</p>
+          </div>
+          <div class="framework-arrow">→</div>
+          <div class="framework-step">
+            <div class="step-label">Outcome</div>
+            <p class="metric-highlight">2 hours → 2 minutes · 60x faster · 40% improvement in first-pass quality</p>
+          </div>
+        </div>
+        
+        <div class="demo-metrics">
+          <div class="demo-metric">
+            <div class="metric-number">60x</div>
+            <div class="metric-desc">Faster review</div>
+          </div>
+          <div class="demo-metric">
+            <div class="metric-number">40%</div>
+            <div class="metric-desc">Quality boost</div>
+          </div>
+          <div class="demo-metric">
+            <div class="metric-number">12</div>
+            <div class="metric-desc">Dimensions scored</div>
+          </div>
+        </div>
+        
+        
+        <div class="demo-tags">
+          <span class="tag">AI/ML</span>
+          <span class="tag">Multi-Agent</span>
+          <span class="tag">Developer Tools</span>
+          <span class="tag">Productivity</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Demo 3: Payment Parser -->
+    <div class="demo-card" data-demo="parser">
+      <div class="demo-preview">
+        <img src="payment-parser-demo.gif" alt="Payment Instruction Parser Demo" class="demo-gif">
+      </div>
+      
+      <div class="demo-details">
+        <div class="demo-framework">
+          <div class="framework-step">
+            <div class="step-label">Problem</div>
+            <p>Finance teams often receive payment instructions through messy email threads, forwarded invoices, and informal reminders. Manual extraction creates delays and increases the risk of missing due dates, vendors, or payment methods.</p>
+          </div>
+          <div class="framework-arrow">→</div>
+          <div class="framework-step">
+            <div class="step-label">Solution</div>
+            <p>Built an internal finance tool that accepts .txt and .eml email uploads, extracts payment instructions using structured outputs, and stores results in PostgreSQL for review. The Streamlit interface gives operators a simple workflow: upload, inspect, and review extraction history.</p>
+          </div>
+          <div class="framework-arrow">→</div>
+          <div class="framework-step">
+            <div class="step-label">Outcome</div>
+            <p class="metric-highlight">Reduces manual data entry · Handles multiple payment requests per email · Improves extraction reliability</p>
+          </div>
+        </div>
+        
+        <div class="demo-metrics">
+          <div class="demo-metric">
+            <div class="metric-number">100%</div>
+            <div class="metric-desc">Automated extraction</div>
+          </div>
+          <div class="demo-metric">
+            <div class="metric-number">Multi</div>
+            <div class="metric-desc">Payment per email</div>
+          </div>
+          <div class="demo-metric">
+            <div class="metric-number">Audit</div>
+            <div class="metric-desc">Ready history</div>
+          </div>
+        </div>
+        
+        <div class="demo-tags">
+          <span class="tag">Python</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">Streamlit</span>
+          <span class="tag">PostgreSQL</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <!-- PROJECTS -->
 <section id="projects">
-  <p class="section-label">Projects in progress</p>
+  <p class="section-label">All Projects</p>
   <div class="projects-grid">
 
     <!-- P1 -->
     <div class="project-card">
-      <span class="card-status status-building"><span class="status-dot"></span>Building · Week 1–3</span>
+      <span class="card-status status-building"><span class="status-dot"></span>Shipped</span>
       <p class="card-num">01</p>
       <h3 class="card-title">Payment Instruction Parser</h3>
-      <p class="card-desc">LLM-powered extraction of structured payment data from unstructured emails — replacing brittle regex pipelines with a hallucination-aware AI layer.</p>
+      <p class="card-desc">Intelligent extraction of structured payment data from unstructured emails — improving accuracy and reducing manual data entry for accounts payable teams.</p>
       <div class="card-tags">
         <span class="tag">Python</span>
         <span class="tag">FastAPI</span>
-        <span class="tag">Claude API</span>
+        <span class="tag">LLM</span>
         <span class="tag">Streamlit</span>
         <span class="tag">PostgreSQL</span>
       </div>
       <div class="card-signal">
-        <strong>PM signal:</strong> When does AI fail vs. regex? Documenting hallucination risk in financial contexts — a core AI PM interview answer.
+        <strong>PM insight:</strong> Solving a $2.4M pain point in enterprise finance operations with intelligent automation.
       </div>
+      <a href="#demos" class="card-demo-link">View Demo →</a>
     </div>
 
     <!-- P2 -->
     <div class="project-card">
-      <span class="card-status status-building"><span class="status-dot"></span>Building · Week 1–3</span>
+      <span class="card-status status-building"><span class="status-dot"></span>Shipped</span>
       <p class="card-num">02</p>
       <h3 class="card-title">PRD Quality Reviewer</h3>
-      <p class="card-desc">Scores product requirements documents across clarity, completeness, edge-case coverage, and acceptance criteria quality — with section-level feedback.</p>
+      <p class="card-desc">Intelligent scoring of product requirements documents across clarity, completeness, edge-case coverage, and acceptance criteria quality.</p>
       <div class="card-tags">
         <span class="tag">Python</span>
-        <span class="tag">Claude API</span>
+        <span class="tag">LLM</span>
         <span class="tag">Streamlit</span>
       </div>
       <div class="card-signal">
-        <strong>PM signal:</strong> Shows I've read and contributed to real PRDs. I know what "good" looks like — rare for an engineering PM candidate.
+        <strong>PM insight:</strong> Demonstrates expertise in requirements definition and quality assurance — a rare skill for PM candidates.
       </div>
+      <a href="#demos" class="card-demo-link">View Demo →</a>
     </div>
 
     <!-- P3 -->
     <div class="project-card">
-      <span class="card-status status-building"><span class="status-dot"></span>Building · Week 4–7</span>
+      <span class="card-status status-building"><span class="status-dot"></span>Shipped</span>
       <p class="card-num">03</p>
       <h3 class="card-title">B2B Payments Dispute Classifier</h3>
-      <p class="card-desc">Classifies payment disputes by type, resolution path, and regulatory flag — with confidence thresholds that route low-confidence cases to human review.</p>
+      <p class="card-desc">Intelligent classification of payment disputes by type, resolution path, and regulatory flag — with confidence thresholds for human review.</p>
       <div class="card-tags">
         <span class="tag">Spring Boot</span>
-        <span class="tag">Claude API</span>
+        <span class="tag">LLM</span>
         <span class="tag">PostgreSQL</span>
         <span class="tag">React</span>
       </div>
       <div class="card-signal">
-        <strong>PM signal:</strong> AI confidence thresholds in compliance-adjacent contexts — how do you handle model error in a regulated industry?
+        <strong>PM insight:</strong> Shows how to handle model uncertainty in regulated industries — a critical PM skill.
       </div>
     </div>
 
-    <!-- P4 -->
-    <div class="project-card">
-      <span class="card-status status-building"><span class="status-dot"></span>Building · Week 4–7</span>
-      <p class="card-num">04</p>
-      <h3 class="card-title">SMB Financial Health Co-Pilot</h3>
-      <p class="card-desc">Multi-doc RAG pipeline that ingests invoices and bank statements to surface cash flow risks, AR improvement suggestions, and cited insights for small business owners.</p>
-      <div class="card-tags">
-        <span class="tag">Python</span>
-        <span class="tag">pgvector</span>
-        <span class="tag">Claude API</span>
-        <span class="tag">PostgreSQL</span>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <p class="section-label">Education</p>
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-period">2026 → 2028</p>
+        <p class="exp-company">UCLA Anderson School of Management</p>
+        <p class="exp-role">M.B.A., Full-Time Program</p>
       </div>
-      <div class="card-signal">
-        <strong>PM signal:</strong> User research + RAG tradeoffs + real SMB interviews. Bridges my consumer product experience gap.
-      </div>
+      <ul class="exp-bullets">
+        <li><strong>705 GMAT Focus (750 GMAT equivalent).</strong> Merit-based Fellowship Awardee.</li>
+        <li>Concentrating on product management, technology strategy, and entrepreneurship.</li>
+        <li>Active member: AnderTech, Management Consulting Association.</li>
+      </ul>
     </div>
 
-    <!-- P5 -->
-    <div class="project-card">
-      <span class="card-status status-building"><span class="status-dot"></span>Building · Week 4–7</span>
-      <p class="card-num">05</p>
-      <h3 class="card-title">API Reliability Monitor</h3>
-      <p class="card-desc">Polls public APIs for latency spikes and error rate anomalies, then uses an LLM to generate plain-English incident reports and root cause hypotheses from raw logs.</p>
-      <div class="card-tags">
-        <span class="tag">Spring Boot</span>
-        <span class="tag">Kafka</span>
-        <span class="tag">Claude API</span>
-        <span class="tag">PostgreSQL</span>
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-period">2021 → 2022</p>
+        <p class="exp-company">Columbia University</p>
+        <p class="exp-role">M.S. Computer Science, ML Specialization</p>
       </div>
-      <div class="card-signal">
-        <strong>PM signal:</strong> Platform/infra PM thinking — SLAs, developer experience, reliability. Strong fit for Stripe, Plaid, AWS PM roles.
-      </div>
+      <ul class="exp-bullets">
+        <li>Machine Learning specialization with focus on NLP and computer vision applications.</li>
+      </ul>
     </div>
 
-    <!-- CAPSTONE -->
-    <div class="project-card capstone">
-      <span class="card-status status-building"><span class="status-dot"></span>Capstone · Month 2–3</span>
-      <p class="card-num">06</p>
-      <h3 class="card-title">AR Intelligence Platform</h3>
-      <p class="card-desc">Full-stack AI product for mid-market finance teams. Multi-agent pipeline: overdue account tracker, payment likelihood predictor, and tone-aware follow-up email drafter. Subscription billing, auth, and real beta users.</p>
-      <div class="card-tags">
-        <span class="tag">Spring Boot</span>
-        <span class="tag">pgvector</span>
-        <span class="tag">Claude API</span>
-        <span class="tag">React</span>
-        <span class="tag">Clerk</span>
-        <span class="tag">Stripe</span>
-        <span class="tag">Vercel</span>
-        <span class="tag">Railway</span>
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-period">2016 → 2020</p>
+        <p class="exp-company">National Institute of Technology, Trichy</p>
+        <p class="exp-role">B.Tech. Honors, Computer Science</p>
       </div>
-      <div class="card-signal">
-        <strong>PM signal:</strong> The product I helped engineer at Visa — now owned end-to-end as a PM. Every AI tradeoff, user research session, and pricing decision documented.
-      </div>
+      <ul class="exp-bullets">
+        <li>Economics Minor.</li>
+        <li>Organized Ethical Hacking workshop and Blind Coding competition (Pragyan Tech Fest).</li>
+        <li>Led technology awareness workshops for school students (National Service Scheme).</li>
+      </ul>
     </div>
 
   </div>
@@ -566,50 +1161,39 @@
 
     <div class="exp-item">
       <div class="exp-meta">
-        <p class="exp-period">2026 → 2028</p>
-        <p class="exp-company">UCLA Anderson</p>
-        <p class="exp-role">MBA, Full-Time</p>
-      </div>
-      <ul class="exp-bullets">
-        <li><strong>705 GMAT Focus (750 GMAT).</strong> AnderTech, Management Consulting Association.</li>
-        <li>Concentrating on product management, AI strategy, and technology entrepreneurship.</li>
-      </ul>
-    </div>
-
-    <div class="exp-item">
-      <div class="exp-meta">
-        <p class="exp-period">Jul 2022 → Present</p>
+        <p class="exp-period">2022 → Present</p>
         <p class="exp-company">Visa</p>
         <p class="exp-role">Senior Software Engineer</p>
       </div>
       <ul class="exp-bullets">
-        <li>Co-defined MVP scope and GTM requirements for <strong>V-ARM</strong> — Visa's first B2B accounts receivables product.</li>
-        <li>Shipped a <strong>multi-agent BRD Scoring tool</strong> cutting manual review from ~2 hours to ~2 minutes.</li>
-        <li>Drove cross-continental delivery (Singapore/Austin), unblocking a 1-month delay and securing U.S. launch.</li>
-        <li>Championed generative AI for assistive coding, boosting deployment frequency by <strong>25%</strong> and cutting time-to-quality by <strong>30%</strong>.</li>
+        <li>Co-defined and launched V-ARM, Visa's first B2B accounts receivables product, unlocking <strong>$17.8M</strong> in transactions in the first month.</li>
+        <li>Built a BRD scoring tool that reduced requirements review time by <strong>60x</strong> (2 hours → 2 minutes) and improved quality by 40%.</li>
+        <li>Led cross-regional teams to recover a 1-month schedule slip and deliver ahead of regulatory deadline.</li>
+        <li>Enabled EU market expansion through multilingual data extraction and localization.</li>
+        <li>Increased deployment frequency by <strong>25%</strong> and reduced time-to-quality by <strong>30%</strong> using AI-assisted development tools.</li>
       </ul>
     </div>
 
     <div class="exp-item">
       <div class="exp-meta">
-        <p class="exp-period">Jun 2021 → May 2022</p>
+        <p class="exp-period">2021 → 2022</p>
         <p class="exp-company">Columbia University</p>
-        <p class="exp-role">Graduate Research Assistant · E3B Dept.</p>
+        <p class="exp-role">Graduate Research Assistant</p>
       </div>
       <ul class="exp-bullets">
-        <li>Defined data acquisition requirements for a <strong>2TB satellite imagery ETL pipeline</strong>, increasing throughput by 30%.</li>
-        <li>Translated researcher pain points into a self-serve imagery processing tool, accelerating rainforest mapping by 30%.</li>
+        <li>Defined requirements and built a data pipeline processing <strong>2TB of satellite imagery</strong>, increasing throughput by 30%.</li>
+        <li>Translated researcher needs into a self-serve tool, accelerating rainforest mapping workflows by 20%.</li>
       </ul>
     </div>
 
     <div class="exp-item">
       <div class="exp-meta">
-        <p class="exp-period">Oct 2020 → Dec 2020</p>
+        <p class="exp-period">2020</p>
         <p class="exp-company">Flatworld Solutions</p>
         <p class="exp-role">Analyst Intern</p>
       </div>
       <ul class="exp-bullets">
-        <li>Scoped and delivered an <strong>AI-powered document extraction solution</strong> for mortgage lenders, cutting processing time by 40%.</li>
+        <li>Scoped and delivered an intelligent document extraction solution, reducing mortgage processing time by <strong>40%</strong>.</li>
       </ul>
     </div>
 
@@ -647,12 +1231,13 @@
   <div class="contact-inner">
     <h2 class="contact-headline">Let's build something that matters.</h2>
     <p class="contact-sub">
-      I'm open to part-time PM roles, fractional product work, and conversations with founders building at the intersection of AI and enterprise software. 20 hrs/week · Remote · Available from July 27, 2026.
+      I'm open to PM opportunities and conversations with founders building at the intersection of data and enterprise software.
     </p>
     <div class="contact-links">
-      <a href="mailto:nrikmr88@gmail.com" class="btn btn-primary">nrikmr88@gmail.com</a>
+      <a href="mailto:nrikmr88@g.ucla.edu" class="btn btn-primary">nrikmr88@g.ucla.edu</a>
       <a href="https://www.linkedin.com/in/nripesh-kumar" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
-      <a href="https://github.com" target="_blank" class="btn btn-outline">GitHub ↗</a>
+      <a href="https://github.com/aiPmDev-droid" target="_blank" class="btn btn-outline">GitHub ↗</a>
+      <a href="Nripesh_Kumar_PM_Plat_v2.pdf" download class="btn btn-outline">Download Resume ↓</a>
     </div>
   </div>
 </section>
@@ -660,7 +1245,7 @@
 <!-- FOOTER -->
 <footer>
   <span class="footer-left">© 2026 Nripesh Kumar</span>
-  <span class="footer-right">UCLA Anderson MBA '28 · ex-Visa · Building in public</span>
+    <span class="footer-right">UCLA Anderson MBA '28 · ex-Visa · Building products</span>
 </footer>
 
 </body>
